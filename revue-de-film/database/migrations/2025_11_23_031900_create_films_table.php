@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('special_features', 200)->nullable();
             $table->string('image', 40)->nullable();
             // https://stackoverflow.com/questions/29886497/how-to-only-use-created-at-in-laravel
-            $table->timestamps('created_at')->nullable(); 
+            $table->timestamp('created_at')->nullable(); 
         });
     }
 
