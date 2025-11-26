@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Critic;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,5 +24,9 @@ class DatabaseSeeder extends Seeder
             ActorSeeder::class,
             ActorFilmSeeder::class,
         ]);
+
+       User::factory(10)
+            ->has(Critic::factory()->count(30), 'critics')
+            ->create();
     }
 }
