@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 // Route 1: Tous les films
 Route::get('/films', [FilmController::class, 'index']);
 
+// Route 9: Recherche de films
+Route::get('/films/search', [FilmController::class, 'search']);
+
 // Route 2: Acteurs d'un film
 Route::get('/films/{film}/actors', [FilmController::class, 'actors']);
 
@@ -19,7 +22,7 @@ Route::get('/films/{film}', [FilmController::class, 'show']);
 Route::post('/users', [UserController::class, 'store']);
 
 // Route 5: Mettre à jour un utilisateur
-Route::patch('/users/{user}', [UserController::class, 'update']);
+Route::put('/users/{user}', [UserController::class, 'update']);
 
 // Route 6: Supprimer une critique
 Route::delete('/critics/{critic}', [CriticController::class, 'destroy']);
@@ -30,5 +33,3 @@ Route::get('/films/{film}/average-score', [FilmController::class, 'averageScore'
 // Route 8: Langage préféré d'un utilisateur
 Route::get('/users/{user}/preferred-language', [UserController::class, 'preferredLanguage']);
 
-// Route 9: Recherche de films
-Route::get('/films/search', [FilmController::class, 'search']);
