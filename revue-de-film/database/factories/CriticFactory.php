@@ -17,7 +17,8 @@ class CriticFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            //'user_id' => User::factory(),
+            
             // https://laravel.com/docs/master/queries (Ordering, Grouping, Limiting, and Offset)
             'film_id' => Film::inRandomOrder()->first()->id ?? Film::factory(),
             'score' => $this->faker->randomFloat(1, 0, 10),

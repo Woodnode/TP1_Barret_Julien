@@ -1,5 +1,8 @@
 <?php
 
+//https://laravel.com/docs/12.x/eloquent-mutators#attribute-casting
+
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

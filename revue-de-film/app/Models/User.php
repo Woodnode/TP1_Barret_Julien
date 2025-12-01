@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+///https://laravel.com/docs/12.x/eloquent-mutators#attribute-casting
+
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;

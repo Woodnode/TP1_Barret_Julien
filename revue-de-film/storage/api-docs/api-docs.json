@@ -1,0 +1,380 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Films API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/critics/{critic}": {
+            "delete": {
+                "tags": [
+                    "Critics"
+                ],
+                "summary": "Supprimer une critique",
+                "description": "Supprime une critique de film",
+                "operationId": "6dc2a233b8638a6fa77818b080d245ae",
+                "parameters": [
+                    {
+                        "name": "critic",
+                        "in": "path",
+                        "description": "ID de la critique à supprimer",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Critique supprimée"
+                    },
+                    "404": {
+                        "description": "Critique non trouvée"
+                    }
+                }
+            }
+        },
+        "/api/films": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Recevoir l'information de tous les films",
+                "description": "Retourne une liste paginée de films",
+                "operationId": "271e474415d2f29bf3c163247c5f4639",
+                "responses": {
+                    "200": {
+                        "description": "Liste de films retournée avec succès"
+                    }
+                }
+            }
+        },
+        "/api/films/{film}/actors": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Recevoir l'information de tous les acteurs d'un film en particulier",
+                "operationId": "1cff924222e557ac955794d87e0bcf7d",
+                "parameters": [
+                    {
+                        "name": "film",
+                        "in": "path",
+                        "description": "ID du film",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Liste des acteurs du film"
+                    },
+                    "404": {
+                        "description": "Film non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/films/{film}": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Recevoir l'information d'un film avec ses critiques",
+                "operationId": "5f8edfd1839b95f178d8fed97762e4e6",
+                "parameters": [
+                    {
+                        "name": "film",
+                        "in": "path",
+                        "description": "ID du film",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Film et ses critiques retournés avec succès"
+                    },
+                    "404": {
+                        "description": "Film non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/films/{film}/average-score": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Recevoir la moyenne des scores pour un film en particulier",
+                "operationId": "4bad7fd3b8a3ee1f4a5e0f39bc61a9ad",
+                "parameters": [
+                    {
+                        "name": "film",
+                        "in": "path",
+                        "description": "ID du film",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Moyenne des scores retournée avec succès"
+                    },
+                    "404": {
+                        "description": "Film non trouvé"
+                    }
+                }
+            }
+        },
+        "/api/films/search": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Recevoir l'information de films suite à une recherche",
+                "description": "Recherche multi-critères sur les films",
+                "operationId": "ddbc3843cfe184eb1429a6ad3d501fbb",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Filtre les films dont le titre contient ce mot-clé",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "bri"
+                        }
+                    },
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "description": "Filtre les films par rating",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "PG"
+                        }
+                    },
+                    {
+                        "name": "minLength",
+                        "in": "query",
+                        "description": "Durée minimale du film (en minutes)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 60
+                        }
+                    },
+                    {
+                        "name": "maxLength",
+                        "in": "query",
+                        "description": "Durée maximale du film (en minutes)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 90
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Résultats paginés de la recherche"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Créer un utilisateur",
+                "description": "Crée un nouvel utilisateur",
+                "operationId": "592819a0265360b2014512d6dbfaf0e7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "login",
+                                    "password",
+                                    "email",
+                                    "last_name",
+                                    "first_name"
+                                ],
+                                "properties": {
+                                    "login": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "johndoe"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "password123"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "john@example.com"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "Doe"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "John"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/api/users/{user}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Mettre à jour un utilisateur (complètement)",
+                "operationId": "e29fc231c7937ab09483d35e6e3d1214",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID de l'utilisateur à mettre à jour",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "login",
+                                    "password",
+                                    "email",
+                                    "last_name",
+                                    "first_name"
+                                ],
+                                "properties": {
+                                    "login": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "updatedlogin"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 8,
+                                        "example": "newpassword123"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "updated@example.com"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "Updated"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "maxLength": 50,
+                                        "example": "User"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur mis à jour"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    },
+                    "422": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/api/users/{user}/preferred-language": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Recevoir l'information du langage préféré d'un utilisateur",
+                "description": "Détermine le langage préféré selon les critiques de films de l'utilisateur",
+                "operationId": "3a6840b805b2a2b723f30645c92e7395",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Langage préféré retourné avec succès"
+                    },
+                    "404": {
+                        "description": "Aucune critique trouvée pour cet utilisateur"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Critics",
+            "description": "Critics"
+        },
+        {
+            "name": "Films",
+            "description": "Films"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        }
+    ]
+}

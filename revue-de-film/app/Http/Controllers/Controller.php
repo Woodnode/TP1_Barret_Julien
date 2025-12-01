@@ -2,6 +2,13 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * @OA\Info(
+ *     title="Films API",
+ *     version="0.1"
+ * )
+ */
+
 abstract class Controller
 {
     const HTTP_OK = 200;

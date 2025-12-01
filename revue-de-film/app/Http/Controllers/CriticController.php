@@ -10,7 +10,29 @@ use App\Models\Critic;
 
 class CriticController extends Controller
 {
-    // Supprimer une critique
+    /**
+ * @OA\Delete(
+ *     path="/api/critics/{critic}",
+ *     tags={"Critics"},
+ *     summary="Supprimer une critique",
+ *     description="Supprime une critique de film",
+ *     @OA\Parameter(
+ *         name="critic",
+ *         in="path",
+ *         required=true,
+ *         description="ID de la critique à supprimer",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(
+ *         response=204,
+ *         description="Critique supprimée"
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Critique non trouvée"
+ *     )
+ * )
+ */
     public function destroy(Critic $critic)
     {
         try 
